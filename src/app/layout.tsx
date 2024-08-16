@@ -4,6 +4,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import Navbar from '@/components/Navbar';
 import Providers from '@/components/Providers';
+import { Toaster } from 'sonner';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['300', '500', '700', '600'] });
 
@@ -26,6 +27,8 @@ export default function RootLayout({
             <div className="flex-grow flex-1">{children}</div>
           </Providers>
         </main>
+
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
