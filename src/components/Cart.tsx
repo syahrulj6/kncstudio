@@ -64,7 +64,7 @@ const Cart = () => {
         ) : (
           <div className="flex h-full flex-col items-center justify-center space-y-1">
             <div className="relative mb-4 w-60 h-60 text-muted-foreground" aria-hidden="true">
-              <Image src="/kncstudio.png" fill alt="empty shopping cart " className="object-contain" />
+              <Image src="/grapy-olshop.png" fill alt="empty shopping cart " className="object-contain" />
             </div>
             <div className="text-xl font-semibold">Your cart is empty</div>
             <SheetTrigger asChild>
