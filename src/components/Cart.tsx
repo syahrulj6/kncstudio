@@ -39,43 +39,43 @@ const Cart = () => {
 
         {itemCount > 0 ? (
           <>
-            <div className="flex w-full flex-col pr-6">
-              <ScrollArea>
+            <ScrollArea>
+              <div className="flex w-full flex-col pr-6">
                 {items.map(({ product }) => (
                   <CartItem product={product} key={product.id} />
                 ))}
-              </ScrollArea>
-            </div>
-            <div className="space-y-4 pr-6">
-              <Separator />
-              <div className="space-y-1.5 text-sm">
-                <div className="flex text-white/70">
-                  <span className="flex-1">Shipping</span>
-                  <span>Free</span>
-                </div>
-                <div className="flex text-white/70">
-                  <span className="flex-1 ">Transaction Fee</span>
-                  <span>{formatPrice(fee)}</span>
-                </div>
-                <div className="flex text-white/70">
-                  <span className="flex-1 ">Total</span>
-                  <span>{formatPrice(cartTotal + fee)}</span>
-                </div>
               </div>
+              <div className="space-y-4 pr-6">
+                <Separator />
+                <div className="space-y-1.5 text-sm">
+                  <div className="flex text-white/70">
+                    <span className="flex-1">Shipping</span>
+                    <span>Free</span>
+                  </div>
+                  <div className="flex text-white/70">
+                    <span className="flex-1 ">Transaction Fee</span>
+                    <span>{formatPrice(fee)}</span>
+                  </div>
+                  <div className="flex text-white/70">
+                    <span className="flex-1 ">Total</span>
+                    <span>{formatPrice(cartTotal + fee)}</span>
+                  </div>
+                </div>
 
-              <SheetFooter>
-                <SheetTrigger asChild>
-                  <Link
-                    href="/cart"
-                    className={buttonVariants({
-                      className: 'w-full',
-                    })}
-                  >
-                    Continue to Checkout
-                  </Link>
-                </SheetTrigger>
-              </SheetFooter>
-            </div>
+                <SheetFooter>
+                  <SheetTrigger asChild>
+                    <Link
+                      href="/cart"
+                      className={buttonVariants({
+                        className: 'w-full',
+                      })}
+                    >
+                      Continue to Checkout
+                    </Link>
+                  </SheetTrigger>
+                </SheetFooter>
+              </div>
+            </ScrollArea>
           </>
         ) : (
           <div className="flex h-full flex-col items-center justify-center space-y-1">
