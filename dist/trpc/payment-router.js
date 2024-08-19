@@ -68,6 +68,9 @@ exports.paymentRouter = (0, trpc_1.router)({
                 case 2:
                     products = (_c.sent()).docs;
                     filteredProducts = products.filter(function (prod) { return Boolean(prod.priceId); });
+                    if (filteredProducts.length === 0) {
+                        throw new server_1.TRPCError({ code: 'NOT_FOUND' });
+                    }
                     return [4 /*yield*/, payload.create({
                             collection: 'orders',
                             data: {
@@ -78,15 +81,12 @@ exports.paymentRouter = (0, trpc_1.router)({
                         })];
                 case 3:
                     order = _c.sent();
-                    line_items = [];
-                    filteredProducts.forEach(function (product) {
-                        line_items.push({
-                            price: product.priceId,
-                            quantity: 1,
-                        });
-                    });
+                    line_items = filteredProducts.map(function (product) { return ({
+                        price: product.priceId,
+                        quantity: 1,
+                    }); });
                     line_items.push({
-                        price: 'price_1PpN3aP7nKIJ6S8iwhj3tgGZ',
+                        price: 'price_1PpN3aP7nKIJ6S8iwhj3tgGZ', // Replace with your actual price ID
                         quantity: 1,
                         adjustable_quantity: {
                             enabled: false,
@@ -112,7 +112,7 @@ exports.paymentRouter = (0, trpc_1.router)({
                 case 6:
                     error_1 = _c.sent();
                     console.log(error_1);
-                    return [2 /*return*/, { url: null }];
+                    throw new server_1.TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to create Stripe session' });
                 case 7: return [2 /*return*/];
             }
         });
@@ -137,7 +137,7 @@ exports.paymentRouter = (0, trpc_1.router)({
                         })];
                 case 2:
                     orders = (_c.sent()).docs;
-                    if (!orders.length) {
+                    if (orders.length === 0) {
                         throw new server_1.TRPCError({ code: 'NOT_FOUND' });
                     }
                     order = orders[0];
