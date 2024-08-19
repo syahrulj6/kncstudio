@@ -44,7 +44,6 @@ const Page = async ({ params }: PropsPage) => {
 
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.label;
 
-  // @ts-expect-error
   const validUrls = product.images.map(({ image }) => (typeof image === 'string' ? image : image.url)).filter(Boolean) as string[];
 
   return (
@@ -67,18 +66,15 @@ const Page = async ({ params }: PropsPage) => {
               ))}
             </ol>
             <div className="mt-4">
-              {/* @ts-expect-error */}
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{product.name}</h1>
             </div>
 
             <section className="mt-4">
               <div className="flex items-center">
-                {/* @ts-expect-error */}
                 <p className="font-medium text-white">{formatPrice(product.price)}</p>
                 <div className="ml-4 border-l text-white/70 border-white/70 pl-4">{label}</div>
               </div>
               <div className="mt-4 space-y-6">
-                {/* @ts-expect-error */}
                 <p className="text-base text-white/70">{product.description}</p>
               </div>
 
@@ -99,7 +95,6 @@ const Page = async ({ params }: PropsPage) => {
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <div>
               <div className="mt-10">
-                {/* @ts-expect-error */}
                 <AddToCartButton product={product} />
               </div>
               <div className="mt-6 text-center">
@@ -112,7 +107,7 @@ const Page = async ({ params }: PropsPage) => {
           </div>
         </div>
       </div>
-      {/* @ts-expect-error */}
+
       <ProductReel href="/products" query={{ category: product.category, limit: 4 }} title={`Similar ${label}`} subtitle={`Browse similar high-quality ${label} just like '${product.name}'`} />
     </MaxWidthWrapper>
   );
