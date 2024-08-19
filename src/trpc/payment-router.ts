@@ -28,7 +28,7 @@ export const paymentRouter = router({
     });
 
     // Type-casting the products to the Product interface
-    const filteredProducts = (products as Product[]).filter((prod) => Boolean(prod.priceId));
+    const filteredProducts = (products as unknown[] as Product[]).filter((prod) => Boolean(prod.priceId));
 
     if (filteredProducts.length === 0) {
       throw new TRPCError({ code: 'NOT_FOUND' });
