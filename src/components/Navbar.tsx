@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import MaxWidthWrapper from './MaxWidthWrapper';
-import { Icons } from './Icons';
 import NavItems from './NavItems';
 import { buttonVariants } from './ui/button';
 import Cart from './Cart';
@@ -14,10 +13,10 @@ const Navbar = async () => {
   const { user } = await getServerSideUser(nextCookies);
 
   return (
-    <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
-      <header className="relative bg-white">
+    <div className="bg-dark sticky z-50 top-0 inset-x-0 h-16">
+      <header className="relative bg-dark">
         <MaxWidthWrapper>
-          <div className="border-b border-gray-200">
+          <div className="">
             <div className="flex h-16 items-center">
               <MobileNav />
 
@@ -44,7 +43,7 @@ const Navbar = async () => {
                     </Link>
                   )}
 
-                  {user ? null : <span className="h-6 w-px bg-gray-200" aria-hidden="true" />}
+                  {user ? null : <span className="h-6 w-px bg-muted-foreground" aria-hidden="true" />}
 
                   {user ? (
                     <UserAccountNav user={user} />
@@ -59,11 +58,11 @@ const Navbar = async () => {
                     </Link>
                   )}
 
-                  {user ? <span className="h-6 w-px bg-gray-200" aria-hidden="true" /> : null}
+                  {user ? <span className="h-6 w-px bg-muted-foreground" aria-hidden="true" /> : null}
 
                   {user ? null : (
                     <div className="flex lg:ml-6">
-                      <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                      <span className="h-6 w-px bg-muted-foreground" aria-hidden="true" />
                     </div>
                   )}
 

@@ -74,7 +74,7 @@ const Page = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <img src="/logo.png" className="h-20 w-20" />
-            <h1 className="text-2xl font-bold">Sign in to your {isSeller ? 'seller' : ''} account</h1>
+            <h1 className="text-2xl font-bold text-white">Sign in to your {isSeller ? 'seller' : ''} account</h1>
 
             <Link
               href="/sign-up"
@@ -108,10 +108,10 @@ const Page = () => {
 
             <div className="relative">
               <div aria-hidden="true" className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
+                <span className="w-full border-t border-muted-foreground" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">or</span>
+                <span className="bg-dark px-2 text-muted-foreground">or</span>
               </div>
             </div>
 
