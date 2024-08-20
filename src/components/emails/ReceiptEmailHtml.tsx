@@ -8,7 +8,7 @@ import * as React from 'react';
 import { format } from 'date-fns';
 
 interface ReceiptEmailProps {
-  email: string;
+  email: string | any;
   date: Date;
   orderId: string;
   products: Product[];
