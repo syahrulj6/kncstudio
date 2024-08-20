@@ -5,9 +5,28 @@ import ProductReel from '@/components/ProductReel';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { getPayloadClient } from '@/get-payload';
 import { formatPrice } from '@/lib/utils';
+import { Media, ProductFile, User } from '@/payload-types';
 import { Check, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+interface Product {
+  id: string;
+  user?: (string | null) | User;
+  name: string;
+  description?: string | null;
+  price: number;
+  category: 'ui_kits' | 'icons';
+  product_files: string | ProductFile;
+  approvedForSale?: ('pending' | 'approved' | 'denied') | null;
+  priceId?: string | null;
+  stripeId?: string | null;
+  images: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
 
 interface PropsPage {
   params: {
@@ -44,7 +63,7 @@ const Page = async ({ params }: PropsPage) => {
 
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.label;
 
-  const validUrls = product.images.map(({ image }) => (typeof image === 'string' ? image : image.url)).filter(Boolean) as string[];
+  const validUrls = product.images.map(({ image }: any) => (typeof image === 'string' ? image : image.url)).filter(Boolean) as string[];
 
   return (
     <MaxWidthWrapper classname="bg-dark">

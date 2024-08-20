@@ -1,8 +1,27 @@
 import { AfterChangeHook, BeforeChangeHook } from 'payload/dist/collections/config/types';
 import { PRODUCT_CATEGORIES } from '../../config';
 import { Access, CollectionConfig } from 'payload/types';
-import { Product, User } from '../../payload-types';
+import { Media, ProductFile, User } from '../../payload-types';
 import { stripe } from '../../lib/stripe';
+
+interface Product {
+  id: string;
+  user?: (string | null) | User;
+  name: string;
+  description?: string | null;
+  price: number;
+  category: 'ui_kits' | 'icons';
+  product_files: string | ProductFile;
+  approvedForSale?: ('pending' | 'approved' | 'denied') | null;
+  priceId?: string | null;
+  stripeId?: string | null;
+  images: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
 
 const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
   const user = req.user;
@@ -19,7 +38,7 @@ const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
   if (fullUser && typeof fullUser === 'object') {
     const { products } = fullUser;
 
-    const allIDs = [...(products?.map((product) => (typeof product === 'object' ? product.id : product)) || [])];
+    const allIDs = [...(products?.map((product: Product) => (typeof product === 'object' ? product.id : product)) || [])];
 
     const createdProductIDs = allIDs.filter((id, index) => allIDs.indexOf(id) === index);
 
