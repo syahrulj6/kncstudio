@@ -1,7 +1,7 @@
 import express from 'express';
 import { WebhookRequest } from './server';
 import { stripe } from './lib/stripe';
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
 import { getPayloadClient } from './get-payload';
 import { Product } from './payload-types';
 import { Resend } from 'resend';
@@ -12,9 +12,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const stripeWebhookHandler = async (req: express.Request, res: express.Response) => {
   const webhookRequest = req as any as WebhookRequest;
   const body = webhookRequest.rawBody;
-  const signature = Array.isArray(req.headers['stripe-signature']) ? String(req.headers['stripe-signature'][0]) : String(req.headers['stripe-signature']);
+  const signature = req.headers['stripe-signature'] || '';
 
-  let event: Stripe.Event;
+  let event;
   try {
     event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET || '');
   } catch (err) {
@@ -72,7 +72,7 @@ export const stripeWebhookHandler = async (req: express.Request, res: express.Re
     // send receipt
     try {
       const data = await resend.emails.send({
-        from: 'KncStudio <farelrudi294@gmail.com>',
+        from: 'DigitalHippo <hello@joshtriedcoding.com>',
         to: [user.email],
         subject: 'Thanks for your order! This is your receipt.',
         html: ReceiptEmailHtml({

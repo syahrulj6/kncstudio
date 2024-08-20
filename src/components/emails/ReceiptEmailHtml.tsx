@@ -20,7 +20,7 @@ export const ReceiptEmail = ({ email, date, orderId, products }: ReceiptEmailPro
   return (
     <Html>
       <Head />
-      <Preview>Your KncStudio Receipt</Preview>
+      <Preview>Your DigitalHippo Receipt</Preview>
 
       <Body style={main}>
         <Container style={container}>
