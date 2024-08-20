@@ -6,7 +6,7 @@ import { appRouter } from './trpc';
 import { inferAsyncReturnType } from '@trpc/server';
 import bodyParser from 'body-parser';
 import { IncomingMessage } from 'http';
-import { stripeWebhookHandler } from './webhooks';
+// import { stripeWebhookHandler } from './webhooks';
 import nextBuild from 'next/dist/build';
 import path from 'path';
 import { PayloadRequest } from 'payload/types';
@@ -55,8 +55,6 @@ const start = async () => {
   });
 
   app.use('/cart', cartRouter);
-
-  app.post('/api/webhook/stripe', webhookMiddleware, stripeWebhookHandler);
 
   if (process.env.NEXT_BUILD) {
     app.listen(PORT, async () => {
