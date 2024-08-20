@@ -68,7 +68,7 @@ var next_utils_1 = require("./next-utils");
 var trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 var trpc_1 = require("./trpc");
 var body_parser_1 = __importDefault(require("body-parser"));
-var webhooks_1 = require("./webhooks");
+// import { stripeWebhookHandler } from './webhooks';
 var build_1 = __importDefault(require("next/dist/build"));
 var path_1 = __importDefault(require("path"));
 var url_1 = require("url");
@@ -114,7 +114,6 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                     return next_utils_1.nextApp.render(req, res, '/cart', parseUrl.query);
                 });
                 app.use('/cart', cartRouter);
-                app.post('/api/webhook/stripe', webhookMiddleware, webhooks_1.stripeWebhookHandler);
                 if (process.env.NEXT_BUILD) {
                     app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
