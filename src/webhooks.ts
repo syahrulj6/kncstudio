@@ -12,9 +12,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const stripeWebhookHandler = async (req: express.Request, res: express.Response) => {
   const webhookRequest = req as any as WebhookRequest;
   const body = webhookRequest.rawBody;
-  const signature = Array.isArray(req.headers['stripe-signature']) ? String(req.headers['stripe-signature'][0]) : String(req.headers['stripe-signature'] || '');
+  const signature = Array.isArray(req.headers['stripe-signature']) ? String(req.headers['stripe-signature'][0]) : String(req.headers['stripe-signature']);
 
-  let event;
+  let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET || '');
   } catch (err) {
@@ -55,7 +55,7 @@ export const stripeWebhookHandler = async (req: express.Request, res: express.Re
 
     const [order] = orders;
 
-    if (!user) return res.status(404).json({ error: 'No such order exists.' });
+    if (!order) return res.status(404).json({ error: 'No such order exists.' });
 
     await payload.update({
       collection: 'orders',
