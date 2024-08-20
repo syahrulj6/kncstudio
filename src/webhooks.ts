@@ -12,7 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const stripeWebhookHandler = async (req: express.Request, res: express.Response) => {
   const webhookRequest = req as any as WebhookRequest;
   const body = webhookRequest.rawBody;
-  const signature = Array.isArray(req.headers['stripe-signature']) ? req.headers['stripe-signature'][0] : req.headers['stripe-signature'] || '';
+  const signature = Array.isArray(req.headers['stripe-signature']) ? String(req.headers['stripe-signature'][0]) : String(req.headers['stripe-signature'] || '');
 
   let event;
   try {

@@ -50,7 +50,7 @@ var stripeWebhookHandler = function (req, res) { return __awaiter(void 0, void 0
             case 0:
                 webhookRequest = req;
                 body = webhookRequest.rawBody;
-                signature = req.headers['stripe-signature'] || '';
+                signature = Array.isArray(req.headers['stripe-signature']) ? String(req.headers['stripe-signature'][0]) : String(req.headers['stripe-signature'] || '');
                 try {
                     event = stripe_1.stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET || '');
                 }
