@@ -29,7 +29,7 @@ export const Media: CollectionConfig = {
     read: async ({ req }) => {
       const referer = req.headers.referer;
 
-      if (!req.user || referer?.includes('sell')) {
+      if (!req.user || !referer?.includes('sell')) {
         return true;
       }
 
@@ -48,7 +48,7 @@ export const Media: CollectionConfig = {
       {
         name: 'thumbnail',
         width: 400,
-        height: 400,
+        height: 300,
         position: 'centre',
       },
       {
