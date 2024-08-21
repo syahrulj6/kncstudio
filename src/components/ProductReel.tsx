@@ -30,7 +30,7 @@ const ProductReel = (props: ProductReelProps) => {
 
   const products = queryResults?.pages.flatMap((page) => page.items);
 
-  let map: (Product | any)[] = [];
+  let map: (Product | null)[] = [];
   if (products && products.length) {
     map = products;
   } else if (isLoading) {
@@ -47,7 +47,7 @@ const ProductReel = (props: ProductReelProps) => {
 
         {href ? (
           <Link href={href} className="hidden text-sm font-medium text-violet-600 hover:text-violet-500 md:block">
-            Shop the collection <span aria-hidden="true">&rarr;</span>
+            See all collections <span aria-hidden="true">&rarr;</span>
           </Link>
         ) : null}
       </div>

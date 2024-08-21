@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full scrollbar   scrollbar-thumb-zinc-500 scrollbar-track-zinc-700">
       <body className={cn('relative h-full font-sans antialiased bg-dark', poppins.className)}>
         <main className="relative flex flex-col min-h-screen">
           <Providers>

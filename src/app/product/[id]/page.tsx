@@ -43,6 +43,7 @@ const Page = async ({ params }: PropsPage) => {
   if (!product) return notFound();
 
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.label;
+  const value = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.value;
 
   const validUrls = product.images.map(({ image }) => (typeof image === 'string' ? image : image.url)).filter(Boolean) as string[];
 
@@ -72,7 +73,9 @@ const Page = async ({ params }: PropsPage) => {
             <section className="mt-4">
               <div className="flex items-center">
                 <p className="font-medium text-white">{formatPrice(product.price)}</p>
-                <div className="ml-4 border-l text-white/70 border-white/70 pl-4">{label}</div>
+                <Link href={`/products?category=${value}`} className="ml-4 border-l text-white/70 border-white/70 pl-4">
+                  {label}
+                </Link>
               </div>
               <div className="mt-4 space-y-6">
                 <p className="text-base text-white/70">{product.description}</p>
