@@ -36,8 +36,9 @@ const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
   });
 
   if (fullUser && typeof fullUser === 'object') {
-    const { products }: User = fullUser;
+    const { products } = fullUser;
 
+    //@ts-ignore
     const allIDs = [...(products?.map((product) => (typeof product === 'object' ? product.id : product)) || [])];
 
     const createdProductIDs = allIDs.filter((id, index) => allIDs.indexOf(id) === index);
