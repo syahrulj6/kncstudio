@@ -44,6 +44,7 @@ const Page = async ({ params }: PropsPage) => {
 
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === product.category)?.label;
 
+  // @ts-ignore
   const validUrls = product.images.map(({ image }) => (typeof image === 'string' ? image : image.url)).filter(Boolean) as string[];
 
   return (
