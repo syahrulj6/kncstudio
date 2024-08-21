@@ -37,7 +37,6 @@ const yourOwnAndPurchased: Access = async ({ req }) => {
 
   const purchasedFileIds = orders
     .map((order) => {
-      // @ts-ignore
       return order.products.map((product) => {
         if (typeof product === 'string') return req.payload.logger.error('Search depth no sufficent to find purchased file IDs');
 
