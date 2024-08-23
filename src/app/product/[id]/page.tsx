@@ -39,7 +39,7 @@ const Page = async ({ params }: PropsPage) => {
     },
   });
 
-  const [product] = products as Product[];
+  const [product] = products;
 
   if (!product) return notFound();
 
